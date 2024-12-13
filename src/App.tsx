@@ -1,12 +1,12 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import MainLayout from "./layout/MainLayout";
-import Profile from "./pages/Profile";
-import NotFound from "./pages/NotFound";
-import DashboardLayout from "./layout/DashboardLayout";
-import { UserProvider } from "./context/UserContext";
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import MainLayout from './layout/MainLayout';
+import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
+import DashboardLayout from './layout/DashboardLayout';
+import { UserProvider } from './context/UserContext';
 
 const App = () => {
   return (

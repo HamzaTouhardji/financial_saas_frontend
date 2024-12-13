@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LogoutButton from "../components/LogoutButton";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import LogoutButton from '../components/LogoutButton';
 
 const Navbar: React.FC = () => {
   return (

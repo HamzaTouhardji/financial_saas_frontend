@@ -1,5 +1,5 @@
-import React from "react";
-import { useTheme } from "../context/ThemeContext";
+import React from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 const ThemeToggleButton: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -9,7 +9,7 @@ const ThemeToggleButton: React.FC = () => {
       onClick={toggleTheme}
       className="flex items-center justify-center space-x-3 p-3 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 shadow-md hover:shadow-lg focus:outline-none transition-all duration-300 transform hover:scale-105"
     >
-      {theme === "dark" ? (
+      {theme === 'dark' ? (
         <>
           <svg
             xmlns="http://www.w3.org/2000/svg"
