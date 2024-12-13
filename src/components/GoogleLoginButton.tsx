@@ -1,23 +1,25 @@
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { deleteCookie, setCookie } from '../utils/utils';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 const GoogleLoginButton = () => {
-
   const handleSuccess = async (response: any) => {
-    const google_token = response.credential;
-  
-    if (google_token) {
-      const expires = new Date();
-      expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000); // Expiration dans 7 jours
-  
-      document.cookie = `token=${google_token}; path=/; secure; SameSite=Strict; expires=${expires.toUTCString()}`;
-      window.location.href = "/dashboard";
-    } else {
-      console.error("Aucun token reçu de Google");
+    try {
+      const google_token = response.credential;
+
+      if (google_token) {
+        setCookie('google-token', google_token);
+        window.location.href = '/dashboard';
+      } else {
+        throw new Error('Aucun token reçu de Google');
+      }
+    } catch (error) {
+      deleteCookie('google-token');
+      alert('Erreur : impossible de gérer le token Google.');
     }
   };
 
   const handleError = () => {
-    console.error("Erreur de connexion Google");
+    console.error('Erreur de connexion Google');
   };
 
   return (

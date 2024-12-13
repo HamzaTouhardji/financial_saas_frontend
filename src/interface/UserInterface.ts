@@ -1,11 +1,20 @@
 export interface User {
-  id: string;
+  id: number;
   email: string;
   firstName: string;
   lastName: string;
-  photo: string;
-  role: number;
-  status: number;
+  photo: {
+    id: string;
+    path: string;
+  };
+  role: {
+    id: string;
+    name: string;
+  };
+  status: {
+    id: string;
+    name: string;
+  };
 }
 
 export interface UserContextType {

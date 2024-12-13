@@ -1,10 +1,13 @@
-import React from "react";
+import { deleteCookie } from '../utils/utils';
+import React from 'react';
 
 const LogoutButton: React.FC = () => {
   const handleLogout = () => {
-    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    window.location.href = "/login"; // Redirige vers la page de login
+    deleteCookie('token');
+    deleteCookie('refreshToken');
+    deleteCookie('google-token');
+    localStorage.clear();
+    window.location.href = '/login';
   };
 
   return (
