@@ -22,16 +22,16 @@ const Planification: React.FC = () => {
   };
 
   const calculateRevenuNet = (monthIndex: number) =>
-    planning[monthIndex].revenue - planning[monthIndex].cogs;
+    Math.trunc(planning[monthIndex].revenue - planning[monthIndex].cogs);
 
   const calculateEbitda = (monthIndex: number) =>
-    calculateRevenuNet(monthIndex) - planning[monthIndex].opex;
+    Math.trunc(calculateRevenuNet(monthIndex) - planning[monthIndex].opex);
 
   const calculateTax = (monthIndex: number) =>
-    calculateEbitda(monthIndex) * 0.2;
+    Math.trunc(calculateEbitda(monthIndex) * 0.2);
 
   const calculateResultat = (monthIndex: number) =>
-    calculateEbitda(monthIndex) - calculateTax(monthIndex);
+    Math.trunc(calculateEbitda(monthIndex) - calculateTax(monthIndex));
 
   return (
     <div className="p-4 dark:bg-gray-900 dark:text-gray-200">
