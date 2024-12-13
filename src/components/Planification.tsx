@@ -41,7 +41,7 @@ const Planification: React.FC = () => {
           <thead>
             <tr className="bg-gray-100 dark:bg-gray-800">
               <th className="border px-4 py-2 dark:border-gray-600">Champs</th>
-              {planning.map((_:any, monthIndex:any) => (
+              {planning.map((_: any, monthIndex: any) => (
                 <th
                   key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
@@ -56,7 +56,7 @@ const Planification: React.FC = () => {
               <td className="border px-4 py-2 dark:border-gray-600">
                 Chiffre d'affaires
               </td>
-              {planning.map((month:any, monthIndex:any) => (
+              {planning.map((month: any, monthIndex: any) => (
                 <td
                   key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
@@ -75,7 +75,7 @@ const Planification: React.FC = () => {
 
             <tr>
               <td className="border px-4 py-2 dark:border-gray-600">COGS</td>
-              {planning.map((month:any, monthIndex:any) => (
+              {planning.map((month: any, monthIndex: any) => (
                 <td
                   key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
@@ -94,7 +94,7 @@ const Planification: React.FC = () => {
 
             <tr>
               <td className="border px-4 py-2 dark:border-gray-600">OPEX</td>
-              {planning.map((month:any, monthIndex:any) => (
+              {planning.map((month: any, monthIndex: any) => (
                 <td
                   key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
@@ -115,7 +115,7 @@ const Planification: React.FC = () => {
               <td className="border px-4 py-2 dark:border-gray-600">
                 Revenu Net
               </td>
-              {planning.map((_:any, monthIndex:any) => (
+              {planning.map((_: any, monthIndex: any) => (
                 <td
                   key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
@@ -127,7 +127,7 @@ const Planification: React.FC = () => {
 
             <tr>
               <td className="border px-4 py-2 dark:border-gray-600">EBITDA</td>
-              {planning.map((_:any, monthIndex:any) => (
+              {planning.map((_: any, monthIndex: any) => (
                 <td
                   key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
@@ -139,7 +139,7 @@ const Planification: React.FC = () => {
 
             <tr>
               <td className="border px-4 py-2 dark:border-gray-600">Tax</td>
-              {planning.map((_:any, monthIndex:any) => (
+              {planning.map((_: any, monthIndex: any) => (
                 <td
                   key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
@@ -153,7 +153,7 @@ const Planification: React.FC = () => {
               <td className="border px-4 py-2 dark:border-gray-600">
                 Résultat
               </td>
-              {planning.map((_:any, monthIndex:any) => (
+              {planning.map((_: any, monthIndex: any) => (
                 <td
                   key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
