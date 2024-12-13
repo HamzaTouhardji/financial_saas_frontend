@@ -24,7 +24,7 @@ export const PlanningProvider: React.FC<{ children: React.ReactNode }> = ({
     opex: Math.floor(Math.random() * 700),
     cogs: Math.floor(Math.random() * 600),
     revenue: Math.floor(Math.random() * 3000),
-    month: new Date(0, i).toLocaleString('en', { month: 'long' }),
+    month: new Date(0, i).toLocaleString('fr', { month: 'long' }),
     year: 2024,
   }));
 

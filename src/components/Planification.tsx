@@ -1,20 +1,37 @@
 import React from 'react';
-import data from '../data/data.json';
-
-// type PlanificationData = {
-//   chiffreAffaires: number[];
-//   cogs: number[];
-//   opex: number[];
-// };
+import { usePlanning } from '../context/PlanningContext';
 
 const Planification: React.FC = () => {
-  const calculateRevenuNet = (month: number) =>
-    data.chiffreAffaires[month] - data.cogs[month];
-  const calculateEbitda = (month: number) =>
-    calculateRevenuNet(month) - data.opex[month];
-  const calculateTax = (month: number) => calculateEbitda(month) * 0.2;
-  const calculateResultat = (month: number) =>
-    calculateEbitda(month) - calculateTax(month);
+  const { planning, setPlanning } = usePlanning();
+
+  if (!planning) {
+    return <div>Chargement des données...</div>;
+  }
+
+  const updateValue = (
+    monthIndex: number,
+    field: keyof (typeof planning)[0],
+    value: number,
+  ) => {
+    const updatedPlanning = [...planning];
+    updatedPlanning[monthIndex] = {
+      ...updatedPlanning[monthIndex],
+      [field]: value,
+    };
+    setPlanning(updatedPlanning);
+  };
+
+  const calculateRevenuNet = (monthIndex: number) =>
+    planning[monthIndex].revenue - planning[monthIndex].cogs;
+
+  const calculateEbitda = (monthIndex: number) =>
+    calculateRevenuNet(monthIndex) - planning[monthIndex].opex;
+
+  const calculateTax = (monthIndex: number) =>
+    calculateEbitda(monthIndex) * 0.2;
+
+  const calculateResultat = (monthIndex: number) =>
+    calculateEbitda(monthIndex) - calculateTax(monthIndex);
 
   return (
     <div className="p-4 dark:bg-gray-900 dark:text-gray-200">
@@ -24,12 +41,12 @@ const Planification: React.FC = () => {
           <thead>
             <tr className="bg-gray-100 dark:bg-gray-800">
               <th className="border px-4 py-2 dark:border-gray-600">Champs</th>
-              {Array.from({ length: 12 }, (_, month) => (
+              {planning.map((_:any, monthIndex:any) => (
                 <th
-                  key={month}
+                  key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
                 >
-                  Mois {month + 1}
+                  Mois {monthIndex + 1}
                 </th>
               ))}
             </tr>
@@ -39,14 +56,17 @@ const Planification: React.FC = () => {
               <td className="border px-4 py-2 dark:border-gray-600">
                 Chiffre d'affaires
               </td>
-              {Array.from({ length: 12 }, (_, month) => (
+              {planning.map((month:any, monthIndex:any) => (
                 <td
-                  key={month}
+                  key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
                 >
                   <input
                     type="number"
-                    value={data.chiffreAffaires[month]}
+                    value={month.revenue}
+                    onChange={(e) =>
+                      updateValue(monthIndex, 'revenue', Number(e.target.value))
+                    }
                     className="w-full min-w-[100px] p-1 border border-gray-300 rounded dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   />
                 </td>
@@ -55,14 +75,17 @@ const Planification: React.FC = () => {
 
             <tr>
               <td className="border px-4 py-2 dark:border-gray-600">COGS</td>
-              {Array.from({ length: 12 }, (_, month) => (
+              {planning.map((month:any, monthIndex:any) => (
                 <td
-                  key={month}
+                  key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
                 >
                   <input
                     type="number"
-                    value={data.cogs[month]}
+                    value={month.cogs}
+                    onChange={(e) =>
+                      updateValue(monthIndex, 'cogs', Number(e.target.value))
+                    }
                     className="w-full p-1 border border-gray-300 rounded dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   />
                 </td>
@@ -71,14 +94,17 @@ const Planification: React.FC = () => {
 
             <tr>
               <td className="border px-4 py-2 dark:border-gray-600">OPEX</td>
-              {Array.from({ length: 12 }, (_, month) => (
+              {planning.map((month:any, monthIndex:any) => (
                 <td
-                  key={month}
+                  key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
                 >
                   <input
                     type="number"
-                    value={data.opex[month]}
+                    value={month.opex}
+                    onChange={(e) =>
+                      updateValue(monthIndex, 'opex', Number(e.target.value))
+                    }
                     className="w-full p-1 border border-gray-300 rounded dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   />
                 </td>
@@ -89,36 +115,36 @@ const Planification: React.FC = () => {
               <td className="border px-4 py-2 dark:border-gray-600">
                 Revenu Net
               </td>
-              {Array.from({ length: 12 }, (_, month) => (
+              {planning.map((_:any, monthIndex:any) => (
                 <td
-                  key={month}
+                  key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
                 >
-                  {calculateRevenuNet(month)}
+                  {calculateRevenuNet(monthIndex)}
                 </td>
               ))}
             </tr>
 
             <tr>
               <td className="border px-4 py-2 dark:border-gray-600">EBITDA</td>
-              {Array.from({ length: 12 }, (_, month) => (
+              {planning.map((_:any, monthIndex:any) => (
                 <td
-                  key={month}
+                  key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
                 >
-                  {calculateEbitda(month)}
+                  {calculateEbitda(monthIndex)}
                 </td>
               ))}
             </tr>
 
             <tr>
               <td className="border px-4 py-2 dark:border-gray-600">Tax</td>
-              {Array.from({ length: 12 }, (_, month) => (
+              {planning.map((_:any, monthIndex:any) => (
                 <td
-                  key={month}
+                  key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
                 >
-                  {calculateTax(month)}
+                  {calculateTax(monthIndex)}
                 </td>
               ))}
             </tr>
@@ -127,12 +153,12 @@ const Planification: React.FC = () => {
               <td className="border px-4 py-2 dark:border-gray-600">
                 Résultat
               </td>
-              {Array.from({ length: 12 }, (_, month) => (
+              {planning.map((_:any, monthIndex:any) => (
                 <td
-                  key={month}
+                  key={monthIndex}
                   className="border px-4 py-2 dark:border-gray-600"
                 >
-                  {calculateResultat(month)}
+                  {calculateResultat(monthIndex)}
                 </td>
               ))}
             </tr>

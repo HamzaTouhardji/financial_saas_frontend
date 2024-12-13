@@ -3,7 +3,7 @@ import DashboardCard from '../components/DashboardCard';
 import ThemeToggleButton from '../components/ThemeToggleButton';
 import Planification from '../components/Planification';
 import Reporting from '../components/Reporting';
-import PlanningGraph from '../components/graph';
+import PlanningGraph from '../components/PlanningGraph';
 import { PlanningProvider } from '../context/PlanningContext';
 
 const Dashboard: React.FC = () => {
